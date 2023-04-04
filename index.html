@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPT-4 Question Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>GPT-4 Question Tracker</h1>
+  </header>
+
+  <main>
+    <p>Remaining questions: <span id="remainingQuestions">25</span></p>
+    <p>Questions per minute: <span id="questionsPerMinute">0</span></p>
+    <p>Time until QPM below threshold: <span id="qpmCountdown">-</span></p>
+    <button id="askQuestion">Ask a question</button>
+    <div id="timersContainer">
+      <h2>Timers</h2>
+      <ul id="timersList"></ul>
+    </div>
+    <div id="chartContainer">
+      <h2>Questions Availability Chart</h2>
+      <div id="chart"></div>
+    </div>
+    <button id="resetTool">Reset</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Dan Kay</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
