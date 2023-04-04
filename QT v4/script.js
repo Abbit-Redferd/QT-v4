@@ -41,8 +41,13 @@ function updateQuestionsPerMinute() {
     questionsPerMinute.style.color = "black";
   }
 
-  const nextQuestionTime = gpt4Questions[0] + 7.5 * 60 * 1000;
-  const timeUntilBelowThreshold = Math.max(0, nextQuestionTime - currentTime);
+  updateQPMCountdown();
+}
+
+function updateQPMCountdown() {
+  const currentTime = Date.now();
+  const timeForNextQuestion = gpt4Questions.length > 0 ? gpt4Questions[0] + 7.5 * 60 * 1000 : currentTime;
+  const timeUntilBelowThreshold = Math.max(0, timeForNextQuestion - currentTime);
   const timeRemainingFormatted = new Date(timeUntilBelowThreshold).toISOString().substr(11, 8);
   qpmCountdown.textContent = timeRemainingFormatted;
 }
@@ -52,6 +57,7 @@ askQuestion.addEventListener("click", () => {
     gpt4Questions.push(Date.now());
     updateCounters();
     changeColors();
+    updateQuestionsPerMinute();
   }
 });
 
@@ -59,6 +65,7 @@ resetTool.addEventListener("click", () => {
   gpt4Questions = [];
   updateCounters();
   changeColors();
+  updateQuestionsPerMinute();
 });
 
 setInterval(updateGPT4Questions, 1000);
@@ -73,7 +80,7 @@ function updateTimersList() {
     const timeRemaining = Math.max(0, 3 * 60 * 60 * 1000 - (Date.now() - questionTime));
     const timeRemainingFormatted = new Date(timeRemaining).toISOString().substr(11, 8);
 
-    // Update the timers list
+        // Update the timers list
     const listItem = document.createElement("li");
     listItem.textContent = `Question ${index + 1}: ${timeRemainingFormatted}`;
     timersList.appendChild(listItem);
